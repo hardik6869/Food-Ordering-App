@@ -1,6 +1,5 @@
 import styles from '../styles/Home.module.css';
 import Head from 'next/head';
-import Image from 'next/image';
 
 const Home = () => {
     return (
@@ -14,7 +13,7 @@ const Home = () => {
                     />
                     <link rel="icon" href="/favicon.ico" />
                 </Head>
-                <h1>Food Ordering App </h1>
+                Food Ordering App
             </div>
         </>
     );
