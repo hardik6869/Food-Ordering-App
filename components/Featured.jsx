@@ -33,12 +33,7 @@ const Featured = () => {
                 style={{transform: `translate(${-100 * index}vw)`}}>
                 {images.map((img, i) => (
                     <div className={featuredStyle.imgContainer} key={i}>
-                        <Image
-                            src={img}
-                            alt=""
-                            layout="fill"
-                            objectFit="contain"
-                        />
+                        <Image src={img} alt="" layout="fill" />
                     </div>
                 ))}
             </div>
