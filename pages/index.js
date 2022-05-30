@@ -1,5 +1,6 @@
 import styles from '../styles/Home.module.css';
 import Head from 'next/head';
+import Featured from '../components/Featured';
 
 const Home = () => {
     return (
@@ -20,7 +21,7 @@ const Home = () => {
                     />
                     <link rel="icon" href="/favicon.ico" />
                 </Head>
-                Food Ordering App
+                <Featured />
             </div>
         </>
     );
