@@ -4,20 +4,20 @@
     background-color: #d1411c;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     position: sticky;
     top: 0;
-    z-index: 3;
+    z-index: 999;
 }
 .item{
-    flex: 3;
+    flex:3;
     display: flex;
     align-items: center;
 }
 .item:nth-child(2){
     flex: 3;
 }
-.item:last-child(3){
+.item:last-child{
     justify-content: flex-end;
 }
 .callButton{
