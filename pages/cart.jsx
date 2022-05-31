@@ -6,7 +6,7 @@ const Cart = () => {
         <div className={CartStyle.container}>
             <div className={CartStyle.left}>
                 <table className={CartStyle.table}>
-                    <tr className={CartStyle.tr}>
+                    <tr className={CartStyle.trTitle}>
                         <th>Product</th>
                         <th>Name</th>
                         <th>Extras</th>
@@ -14,7 +14,7 @@ const Cart = () => {
                         <th>Quentity</th>
                         <th>Total</th>
                     </tr>
-                    <tr>
+                    <tr className={CartStyle.tr}>
                         <td>
                             <div className={CartStyle.imgContainer}>
                                 <Image
@@ -35,6 +35,35 @@ const Cart = () => {
                         </td>
                         <td>
                             <span className={CartStyle.price}>$19.99</span>
+                        </td>
+                        <td>
+                            <span className={CartStyle.quantity}>2</span>
+                        </td>
+                        <td>
+                            <span className={CartStyle.total}>$39.80</span>
+                        </td>
+                    </tr>
+                    <tr className={CartStyle.tr}>
+                        <td>
+                            <div className={CartStyle.imgContainer}>
+                                <Image
+                                    src="/assets/pizza.png"
+                                    layout="fill"
+                                    objectFit="cover"
+                                    alt=""
+                                />
+                            </div>
+                        </td>
+                        <td>
+                            <span className={CartStyle.name}>CORALZO</span>
+                        </td>
+                        <td>
+                            <span className={CartStyle.extras}>
+                                Double ingredient, spicy sauce
+                            </span>
+                        </td>
+                        <td>
+                            <span className={CartStyle.price}>$19.90</span>
                         </td>
                         <td>
                             <span className={CartStyle.quantity}>2</span>

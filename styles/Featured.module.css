@@ -27,3 +27,10 @@
     height: 100%;
     position: relative;
   }
+
+  @media screen and (max-width: 480px) {
+    .container{
+      height: 30vh;
+      position: relative;
+    }
+   }
