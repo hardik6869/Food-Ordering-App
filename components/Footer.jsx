@@ -7,8 +7,9 @@ const Footer = () => {
             <div className={FooterStyle.item}>
                 <Image
                     src="/assets/bg.png"
-                    layout="fill"
-                    objectFit="cover"
+                    className={FooterStyle.img}
+                    height={100}
+                    width={350}
                     alt=""
                 />
             </div>
