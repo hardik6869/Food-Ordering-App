@@ -1,19 +1,16 @@
 import ProductCardStyle from '../styles/ProductCard.module.css';
 import Image from 'next/image';
-const ProductCard = () => {
+import Link from 'next/link';
+const ProductCard = ({product}) => {
+    console.log(product);
     return (
         <div className={ProductCardStyle.container}>
-            <Image
-                src="/../public/assets/pizza.png"
-                alt=""
-                width="200"
-                height="200"
-            />
-            <h1 className={ProductCardStyle.title}> FIORI DI ZUCCA</h1>
-            <span className={ProductCardStyle.price}> $19.00 </span>
-            <p className={ProductCardStyle.desc}>
-                Lorem ipsum dolor sit amet consectetur adipiscing elite.
-            </p>
+            <Link href={`/product/${product._id}`}>
+                <Image src={product.img} alt="" width="500" height="500" />
+            </Link>
+            <h1 className={ProductCardStyle.title}> {product.title}</h1>
+            <span className={ProductCardStyle.price}>${product.prices[0]}</span>
+            <p className={ProductCardStyle.desc}>{product.desc}</p>
         </div>
     );
 };
