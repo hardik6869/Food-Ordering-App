@@ -12,12 +12,15 @@
         "@babel/plugin-proposal-do-expressions": "^7.16.7",
         "@babel/plugin-proposal-logical-assignment-operators": "^7.17.12",
         "@next/eslint-plugin-next": "^12.1.6",
+        "@reduxjs/toolkit": "^1.8.2",
         "axios": "^0.27.2",
         "install": "^0.13.0",
         "mongoose": "^6.3.5",
         "next": "^12.1.6",
         "react": "^18.1.0",
-        "react-dom": "^18.1.0"
+        "react-dom": "^18.1.0",
+        "react-redux": "^8.0.2",
+        "redux": "^4.2.0"
     },
     "devDependencies": {
         "autoprefixer": "^10.4.7",

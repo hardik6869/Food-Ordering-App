@@ -2,16 +2,19 @@
     height: calc(100vh - 100px);
     display: flex; 
     align-items: center;
-    justify-content: center;
+    justify-content: right;
+    padding-left: 12%;
 }
 .left{
     flex: 1;
     height: 100%;
+    display: flex; 
 }
 .right{
     flex: 1;
     height: 100%;
-    padding: 100px;
+    padding-top: 5%;
+    
 }
 .imgContainer{
     width: 80%;
