@@ -10,10 +10,12 @@ import {
 import {reset} from '../redux/cartSlice';
 import axios from 'axios';
 import {useRouter} from 'next/router';
+import OrderDetaild from '../components/OrderDetaild';
 
 const Cart = () => {
     const cart = useSelector((state) => state.cart);
     const [open, setOpen] = useState(false);
+    const [cash, setCash] = useState(false);
     const amount = cart.total;
     const currency = 'USD';
     const style = {layout: 'vertical'};
@@ -171,7 +173,9 @@ const Cart = () => {
                     </div>
                     {open ? (
                         <div className={CartStyle.paymentMethods}>
-                            <button className={CartStyle.payButton}>
+                            <button
+                                className={CartStyle.payButton}
+                                onClick={() => setCash(true)}>
                                 CASH ON DELIVERY
                             </button>
                             <PayPalScriptProvider
@@ -197,6 +201,9 @@ const Cart = () => {
                     )}
                 </div>
             </div>
+            {cash && (
+                <OrderDetaild total={cart.total} createOrder={createOrder} />
+            )}
         </div>
     );
 };

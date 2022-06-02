@@ -127,7 +127,7 @@ const Order = ({order}) => {
                             <b className={OrderStyle.totalTextTitle}>
                                 Subtotal:
                             </b>
-                            $79.60
+                            ${order.total}
                         </div>
                         <div className={OrderStyle.totalText}>
                             <b className={OrderStyle.totalTextTitle}>
@@ -136,8 +136,8 @@ const Order = ({order}) => {
                             $0.00
                         </div>
                         <div className={OrderStyle.totalText}>
-                            <b className={OrderStyle.totalTextTitle}>Total:</b>
-                            $79.60
+                            <b className={OrderStyle.totalTextTitle}>Total:</b>$
+                            {order.total}
                         </div>
                         <button disabled className={OrderStyle.button}>
                             PAID

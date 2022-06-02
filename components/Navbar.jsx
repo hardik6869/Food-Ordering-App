@@ -24,7 +24,10 @@ const Navbar = () => {
             </div>
             <div className={navbarStyle.item}>
                 <ul className={navbarStyle.list}>
-                    <li className={navbarStyle.listItem}> Homepage</li>
+                    <Link href="/cart" passHref>
+                        <li className={navbarStyle.listItem}>Homepage </li>
+                    </Link>
+
                     <li className={navbarStyle.listItem}> Products</li>
                     <li className={navbarStyle.listItem}> Menu</li>
                     <span className={navbarStyle.mlogo}>
