@@ -101,3 +101,17 @@
         width: 100%;
     }
 }
+.paymentMethods{
+    margin-top: 10px;
+    flex-direction: column;
+    display: flex;
+}
+.payButton{
+    padding: 10px 5px;
+    margin-bottom: 6px;
+    cursor: pointer;
+    color: teal;
+    background-color: white;
+    font-weight: bold;
+    border-radius: 5px;
+}

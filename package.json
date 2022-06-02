@@ -12,6 +12,7 @@
         "@babel/plugin-proposal-do-expressions": "^7.16.7",
         "@babel/plugin-proposal-logical-assignment-operators": "^7.17.12",
         "@next/eslint-plugin-next": "^12.1.6",
+        "@paypal/react-paypal-js": "^7.8.1",
         "@reduxjs/toolkit": "^1.8.2",
         "axios": "^0.27.2",
         "install": "^0.13.0",
