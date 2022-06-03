@@ -1,6 +1,5 @@
 {
-    "name": "boilerplate",
-    "version": "0.1.0",
+    "name": "Food Ordering App",
     "private": true,
     "scripts": {
         "dev": "next dev",
@@ -9,8 +8,6 @@
         "lint": "next lint"
     },
     "dependencies": {
-        "@babel/plugin-proposal-do-expressions": "^7.16.7",
-        "@babel/plugin-proposal-logical-assignment-operators": "^7.17.12",
         "@next/eslint-plugin-next": "^12.1.6",
         "@paypal/react-paypal-js": "^7.8.1",
         "@reduxjs/toolkit": "^1.8.2",
@@ -26,7 +23,6 @@
     },
     "devDependencies": {
         "autoprefixer": "^10.4.7",
-        "babel-preset-env": "^1.7.0",
         "eslint": "8.12.0",
         "eslint-config-next": "12.1.1",
         "postcss": "^8.4.14",

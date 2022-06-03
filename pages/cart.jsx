@@ -110,7 +110,6 @@ const Cart = () => {
                     <tbody>
                         {cart.products.map((product) => (
                             <tr className={CartStyle.tr} key={product._id}>
-                                {console.log(product)}
                                 <td>
                                     <div className={CartStyle.imgContainer}>
                                         <Image
@@ -130,7 +129,6 @@ const Cart = () => {
                                     <span className={CartStyle.extra}>
                                         {product.extras.map((extra) => (
                                             <span key={extra._id}>
-                                                {console.log(extra)}
                                                 {extra.text}
                                             </span>
                                         ))}
