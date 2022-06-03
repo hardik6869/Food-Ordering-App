@@ -6,7 +6,7 @@ const AddButton = ({setClose}) => {
                 setClose(false);
             }}
             className={AddStyle.mainAddButton}>
-            Add New Pizza
+            Add a New Pizza
         </div>
     );
 };
