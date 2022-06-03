@@ -27,8 +27,9 @@ const Navbar = () => {
                     <Link href="/" passHref>
                         <li className={navbarStyle.listItem}>Homepage </li>
                     </Link>
-
-                    <li className={navbarStyle.listItem}> Products</li>
+                    <Link href="/" passHref>
+                        <li className={navbarStyle.listItem}> Products</li>
+                    </Link>
                     <li className={navbarStyle.listItem}> Menu</li>
                     <span className={navbarStyle.mlogo}>
                         <i

@@ -1,7 +1,7 @@
 .container{
     height: 100px;
     padding: 0px 50px;
-    background-color: #d1411c;
+    background-color: #337ef5;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -44,12 +44,11 @@
     background-color: white;
     border-radius: 50%;
     padding: 10px;
-    color: #d1411c; 
+    color: #337ef5; 
 }
 
 .logo{
     font-size: 30px;
-    
 }
 
 .list{
@@ -80,7 +79,7 @@
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    color: #d1411c;
+    color: #337ef5;
 }
  @media screen and (max-width: 480px) {
   .item:nth-child(2){

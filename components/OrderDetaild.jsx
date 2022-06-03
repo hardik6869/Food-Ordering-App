@@ -11,14 +11,14 @@ const OrderDetaild = ({total, createOrder}) => {
         <div className={OrderDetailStyle.container}>
             <div className={OrderDetailStyle.wrapper}>
                 <h1 className={OrderDetailStyle.title}>
-                    You will pay $12 after delivery.
+                    You will pay ₹12 after delivery.
                 </h1>
                 <div className={OrderDetailStyle.item}>
                     <label className={OrderDetailStyle.label}>
                         Name Surname
                     </label>
                     <input
-                        placeholder="John Doe"
+                        placeholder="Full Name"
                         type="text"
                         className={OrderDetailStyle.input}
                         onChange={(e) => setCustomer(e.target.value)}
@@ -30,7 +30,7 @@ const OrderDetaild = ({total, createOrder}) => {
                     </label>
                     <input
                         type="text"
-                        placeholder="+1 234 567 89"
+                        placeholder="(+91) 23456 70489"
                         className={OrderDetailStyle.input}
                     />
                 </div>
@@ -38,7 +38,7 @@ const OrderDetaild = ({total, createOrder}) => {
                     <label className={OrderDetailStyle.label}>Address</label>
                     <textarea
                         rows={5}
-                        placeholder="Elton St. 505 NY"
+                        placeholder="Ahmedabad 505 IND"
                         type="text"
                         className={OrderDetailStyle.textarea}
                         onChange={(e) => setAddress(e.target.value)}

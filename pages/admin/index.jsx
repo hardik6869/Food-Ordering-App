@@ -65,7 +65,7 @@ const Index = ({orders, products}) => {
                                 </td>
                                 <td>{product._id.slice(0.5)}...</td>
                                 <td> {product.title} </td>
-                                <td>${product.prices[0]}</td>
+                                <td>₹{product.prices[0]}</td>
                                 <td>
                                     <button className={AdminStyle.button}>
                                         Edit
@@ -101,7 +101,7 @@ const Index = ({orders, products}) => {
                             <tr className={AdminStyle.trTitle} key={order._id}>
                                 <td>{order._id.slice(0.5)}...</td>
                                 <td>{order.customer}</td>
-                                <td>${order.total}</td>
+                                <td>₹{order.total}</td>
                                 <td>
                                     {order.method === 0 ? (
                                         <span>Cash</span>

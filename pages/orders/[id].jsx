@@ -38,7 +38,7 @@ const Order = ({order}) => {
 
                             <td>
                                 <span className={OrderStyle.total}>
-                                    ${order.total}
+                                    ₹{order.total}
                                 </span>
                             </td>
                         </tr>
@@ -127,16 +127,16 @@ const Order = ({order}) => {
                             <b className={OrderStyle.totalTextTitle}>
                                 Subtotal:
                             </b>
-                            ${order.total}
+                            ₹{order.total}
                         </div>
                         <div className={OrderStyle.totalText}>
                             <b className={OrderStyle.totalTextTitle}>
                                 Discount:
                             </b>
-                            $0.00
+                            ₹0.00
                         </div>
                         <div className={OrderStyle.totalText}>
-                            <b className={OrderStyle.totalTextTitle}>Total:</b>$
+                            <b className={OrderStyle.totalTextTitle}>Total:</b>₹
                             {order.total}
                         </div>
                         <button disabled className={OrderStyle.button}>

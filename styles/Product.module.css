@@ -22,10 +22,10 @@
     position: relative;
 }
 .price{
-    color:#d1411c;
+    color:#337ef5;
     font-size: 24px;
     font-weight: 400;
-    border-bottom: 1px solid #d1411c;
+    border-bottom: 1px solid #337ef5;
 }
 .sizes{
     width: 40%;
@@ -78,7 +78,7 @@
 .button{
     height: 30px;
     margin-left: 10px;
-    background-color:#d1411c;
+    background-color:#337ef5;
     color: white;
     border: none;
     cursor: pointer;

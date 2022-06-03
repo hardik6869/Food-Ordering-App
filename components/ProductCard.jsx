@@ -8,7 +8,7 @@ const ProductCard = ({product}) => {
                 <Image src={product.img} alt="" width="500" height="500" />
             </Link>
             <h1 className={ProductCardStyle.title}> {product.title}</h1>
-            <span className={ProductCardStyle.price}>${product.prices[0]}</span>
+            <span className={ProductCardStyle.price}>₹{product.prices[0]}</span>
             <p className={ProductCardStyle.desc}>{product.desc}</p>
         </div>
     );

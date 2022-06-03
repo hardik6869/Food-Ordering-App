@@ -24,7 +24,7 @@
 }
 .name{
     font-weight: 500;
-    color: #d1411c;
+    color: #337ef5;
     font-size: 18px;
 }
 .total{
@@ -53,7 +53,7 @@
 .button{
     margin-top: 20px;
     height: 30px;
-    color: #d1411c;
+    color: #337ef5;
     font-weight: bold;
     cursor: pointer;
 }

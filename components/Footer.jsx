@@ -25,30 +25,30 @@ const Footer = () => {
                     <p className={FooterStyle.text}>
                         1654 R. Don Road #304.
                         <br />
-                        NewYork,85022
+                        India,85022
                         <br />
-                        (602) 867-1011
+                        (+91) 86712 21011
                     </p>
                     <p className={FooterStyle.text}>
                         2365 R. Don Road #232.
                         <br />
-                        NewYork,85022
+                        India,85022
                         <br />
-                        (602) 867-1012
+                        (+91) 86722 21012
                     </p>
                     <p className={FooterStyle.text}>
                         1614 R. Don Road #453.
                         <br />
-                        NewYork,85022
+                        India,85022
                         <br />
-                        (602) 867-1013
+                        (+91) 86712 51013
                     </p>
                     <p className={FooterStyle.text}>
                         1614 W. caroll St #745.
                         <br />
-                        NewYork,85022
+                        India,85022
                         <br />
-                        (602) 867-1014
+                        (+91) 86779 61014
                     </p>
                 </div>
                 <div className={FooterStyle.card}>

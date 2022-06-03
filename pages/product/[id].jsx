@@ -49,7 +49,7 @@ const Product = ({product}) => {
 
             <div className={ProductStyle.right}>
                 <h1 className={ProductStyle.title}> {product.title}</h1>
-                <span className={ProductStyle.price}>${price}</span>
+                <span className={ProductStyle.price}>₹{price}</span>
                 <p className={ProductStyle.desc}> {product.desc}</p>
                 <h3 className={ProductStyle.choose}> Choose the size</h3>
 
