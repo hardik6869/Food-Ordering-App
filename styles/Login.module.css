@@ -31,4 +31,12 @@
     color: red;
   }
 
-  
+  .errorCode{
+    color: red;
+  }
+  .btn{
+    margin: 10px;
+    font-weight: 600;
+    text-align: center;
+    color: teal;
+  }

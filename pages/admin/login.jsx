@@ -2,11 +2,14 @@ import axios from 'axios';
 import {useRouter} from 'next/router';
 import {useState} from 'react';
 import LoginStyle from '../../styles/Login.module.css';
+import {useDispatch} from 'react-redux';
+import {login} from '../../redux/adminSlice';
 
 const Login = () => {
     const [username, setUsername] = useState(null);
     const [password, setPassword] = useState(null);
     const [error, setError] = useState(false);
+    const dispatch = useDispatch();
     const router = useRouter();
 
     const handleClick = async () => {
@@ -16,6 +19,7 @@ const Login = () => {
                 password,
             });
             router.push('/admin');
+            dispatch(login());
         } catch (error) {
             setError(true);
         }
@@ -48,3 +52,18 @@ const Login = () => {
 };
 
 export default Login;
+
+// {!isLogin && (
+//     <div className={LoginStyle.container}>
+//         <div className={LoginStyle.wrapper}>
+//             <h1 className={LoginStyle.errorCode}>
+//                 404 Page Not Found
+//             </h1>
+//             <Link href="/admin">
+//                 <a className={LoginStyle.btn}>
+//                     <i class="ffa-arrow-left"> Back to home</i>
+//                 </a>
+//             </Link>
+//         </div>
+//     </div>
+// )}

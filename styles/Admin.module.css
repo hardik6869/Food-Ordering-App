@@ -1,13 +1,23 @@
 .container {
     padding: 50px;
+  }
+  .main{
     display: flex;
   }
-  
+  .topBtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .title{
+    color: teal;
+    padding-left: 15px;
+  }
   .item {
     flex: 1;
   }
-  
   .table {
+    margin: 5px;
     width: 100%;
     border-spacing: 20px;
     text-align: left;
