@@ -3,15 +3,15 @@ import Image from 'next/image';
 import {useState} from 'react';
 
 const Featured = () => {
-    const [index, setIndex] = useState(0);
+    const [index, setIndex] = useState<number>(0);
 
-    const images = [
+    const images: String[] = [
         '/assets/featured.jpg',
         '/assets/featured2.jpg',
         '/assets/featured3.jpg',
     ];
 
-    const handleArrow = (direction) => {
+    const handleArrow = (direction: string) => {
         if (direction === 'l') {
             setIndex(index !== 0 ? index - 1 : 2);
         }
@@ -30,7 +30,7 @@ const Featured = () => {
             <div
                 className={featuredStyle.wrapper}
                 style={{transform: `translate(${-100 * index}vw)`}}>
-                {images.map((img, i) => (
+                {images.map((img: string, i: number) => (
                     <div className={featuredStyle.imgContainer} key={i}>
                         <Image src={img} alt="" layout="fill" />
                     </div>

@@ -5,21 +5,21 @@ import LoginStyle from '../../styles/Login.module.css';
 import {useDispatch} from 'react-redux';
 import {login} from '../../redux/adminSlice';
 
-const Login = () => {
-    const [username, setUsername] = useState(null);
-    const [password, setPassword] = useState(null);
-    const [error, setError] = useState(false);
+const Login = (): JSX.Element => {
+    const [username, setUsername] = useState<String>(null);
+    const [password, setPassword] = useState<String>(null);
+    const [error, setError] = useState<boolean>(false);
     const dispatch = useDispatch();
     const router = useRouter();
 
-    const handleClick = async () => {
+    const handleClick = async (): Promise<void> => {
         try {
             await axios.post('http://localhost:3000/api/login', {
                 username,
                 password,
             });
             router.push('/admin');
-            dispatch(login());
+            dispatch(login(true));
         } catch (error) {
             setError(true);
         }

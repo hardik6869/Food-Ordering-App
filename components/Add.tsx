@@ -1,35 +1,39 @@
-import axios from 'axios';
-import {useState} from 'react';
+import {ChangeEvent, useState} from 'react';
+import axios, {AxiosResponse} from 'axios';
 import styles from '../styles/Add.module.css';
 
-const Add = ({setClose}) => {
+const Add = ({setClose}): JSX.Element => {
     const [file, setFile] = useState(null);
-    const [title, setTitle] = useState(null);
-    const [desc, setDesc] = useState(null);
+    const [title, setTitle] = useState<string>(null);
+    const [desc, setDesc] = useState<string>(null);
     const [prices, setPrices] = useState([]);
     const [extra, setExtra] = useState(null);
     const [extraOptions, setExtraOptions] = useState([]);
 
-    const changePrice = (e, index) => {
+    const changePrice = (
+        e: ChangeEvent<HTMLInputElement>,
+        index: number,
+    ): void => {
         const currentPrices = prices;
         currentPrices[index] = e.target.value;
         setPrices(currentPrices);
     };
 
-    const handleExtraInput = (e) => {
+    const handleExtraInput = (e: {
+        target: {name: string; value: string};
+    }): void => {
         setExtra({...extra, [e.target.name]: e.target.value});
     };
-    const handleExtra = (e) => {
+    const handleExtra = (): void => {
         setExtraOptions((prev) => [...prev, extra]);
     };
 
-    const handleCreate = async () => {
-        console.log('add');
-        const data = new FormData();
+    const handleCreate = async (): Promise<void> => {
+        const data: FormData = new FormData();
         data.append('file', file);
         data.append('upload_preset', 'uploads');
         try {
-            const uploadRes = await axios.post(
+            const uploadRes: AxiosResponse = await axios.post(
                 'https://api.cloudinary.com/v1_1/dbywuuxau/image/upload',
                 data,
             );
@@ -73,7 +77,6 @@ const Add = ({setClose}) => {
                     <label className={styles.label}>Desc</label>
                     <textarea
                         rows={4}
-                        type="text"
                         onChange={(e) => setDesc(e.target.value)}
                     />
                 </div>

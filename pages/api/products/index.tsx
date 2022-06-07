@@ -1,13 +1,18 @@
+import {NextApiRequest, NextApiResponse} from 'next';
+import {Products} from '../../../interface/Interface';
 import dbConnect from '../../../lib/mongo';
 import Product from '../../../models/Products';
 
-export default async function handler(req, res) {
+export default async function handler(
+    req: NextApiRequest,
+    res: NextApiResponse,
+): Promise<void> {
     const {method, cookies} = req;
-    const token = cookies.token;
+    const token: string = cookies.token;
     dbConnect();
     if (method === 'GET') {
         try {
-            const products = await Product.find();
+            const products: Products[] = await Product.find();
             res.status(200).json(products);
         } catch (error) {
             res.status(500).json(error);
@@ -18,7 +23,7 @@ export default async function handler(req, res) {
             return res.status(401).json('Not authenticated!');
         }
         try {
-            const product = await Product.create(req.body);
+            const product: Products = await Product.create(req.body);
             res.status(201).json(product);
         } catch (error) {
             res.status(500).json(error);

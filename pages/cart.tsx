@@ -8,23 +8,28 @@ import {
     usePayPalScriptReducer,
 } from '@paypal/react-paypal-js';
 import {reset} from '../redux/cartSlice';
-import axios from 'axios';
-import {useRouter} from 'next/router';
+import axios, {AxiosResponse} from 'axios';
+import {NextRouter, useRouter} from 'next/router';
 import OrderDetaild from '../components/OrderDetaild';
 
-const Cart = () => {
+const Cart = (): JSX.Element => {
     const cart = useSelector((state) => state.cart);
-    const [open, setOpen] = useState(false);
-    const [cash, setCash] = useState(false);
-    const amount = cart.total;
+    const [open, setOpen] = useState<boolean>(false);
+    const [cash, setCash] = useState<boolean>(false);
+    const amount: string = cart.total;
     const currency = 'USD';
-    const style = {layout: 'vertical'};
+    const style: Object = {layout: 'vertical'};
     const dispatch = useDispatch();
-    const router = useRouter();
+    const router: NextRouter = useRouter();
 
-    const createOrder = async (data) => {
+    const createOrder = async (data: {
+        customer: string;
+        address: string;
+        total: number;
+        method: number;
+    }) => {
         try {
-            const res = await axios.post(
+            const res: AxiosResponse = await axios.post(
                 'http://localhost:3000/api/orders',
                 data,
             );

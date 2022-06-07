@@ -1,6 +1,7 @@
 import cookie from 'cookie';
+import {NextApiRequest, NextApiResponse} from 'next';
 
-const handler = (req, res) => {
+const handler = (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method === 'POST') {
         const {username, password} = req.body;
         if (

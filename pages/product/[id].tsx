@@ -1,27 +1,33 @@
 import Image from 'next/image';
 import ProductStyle from '../../styles/Product.module.css';
-import {useState} from 'react';
-import axios from 'axios';
+import {ChangeEvent, useState} from 'react';
+import axios, {AxiosResponse} from 'axios';
 import {useDispatch} from 'react-redux';
 import {addProduct} from '../../redux/cartSlice';
+import {GetServerSideProps} from 'next';
+import {Products} from '../../interface/Interface';
+import {ProdOption} from '../../interface/Interface';
 
-const Product = ({product}) => {
+const Product = ({product}: {product: Products}): JSX.Element => {
     const [price, setPrice] = useState(product.prices[0]);
     const [size, setSize] = useState(0);
     const [quantity, setQuantity] = useState(1);
     const [extras, setExtras] = useState([]);
     const dispatch = useDispatch();
 
-    const changePrice = (number) => {
+    const changePrice = (number: number): void => {
         setPrice(price + number);
     };
 
-    const handleSize = (sizeIndex) => {
+    const handleSize = (sizeIndex: number): void => {
         const difference = product.prices[sizeIndex] - product.prices[size];
         setSize(sizeIndex);
         changePrice(difference);
     };
-    const handleChange = (e, option) => {
+    const handleChange = (
+        e: ChangeEvent<HTMLInputElement>,
+        option: {price: number; _id: string},
+    ): void => {
         const checked = e.target.checked;
         if (checked) {
             changePrice(option.price);
@@ -31,7 +37,7 @@ const Product = ({product}) => {
             setExtras(extras.filter((extra) => extra._id !== option._id));
         }
     };
-    const handleClick = () => {
+    const handleClick = (): void => {
         dispatch(addProduct({...product, extras, price, quantity}));
     };
     return (
@@ -77,8 +83,8 @@ const Product = ({product}) => {
                     Choose Additional Ingredients.
                 </h3>
                 <div className={ProductStyle.ingredients}>
-                    {product.extraOptions.map((option) => (
-                        <div className={ProductStyle.option} key={option.id}>
+                    {product.extraOptions.map((option: ProdOption) => (
+                        <div className={ProductStyle.option} key={option._id}>
                             <input
                                 type="checkbox"
                                 id={option.text}
@@ -93,7 +99,7 @@ const Product = ({product}) => {
                 <div className={ProductStyle.add}>
                     <input
                         type="number"
-                        onChange={(e) => setQuantity(e.target.value)}
+                        onChange={(e) => setQuantity(Number(e.target.value))}
                         defaultValue={1}
                         className={ProductStyle.quantity}
                     />
@@ -110,8 +116,8 @@ const Product = ({product}) => {
 
 export default Product;
 
-export const getServerSideProps = async ({params}) => {
-    const res = await axios.get(
+export const getServerSideProps: GetServerSideProps = async ({params}) => {
+    const res: AxiosResponse<Products> = await axios.get(
         `http://localhost:3000/api/products/${params.id}`,
     );
     return {

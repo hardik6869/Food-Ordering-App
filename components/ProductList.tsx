@@ -1,7 +1,7 @@
 import ProductListStyle from '../styles/ProductList.module.css';
 import ProductCard from './ProductCard';
 
-const ProductList = ({productList}) => {
+const ProductList = ({productList}): JSX.Element => {
     return (
         <div className={ProductListStyle.container}>
             <h1 className={ProductListStyle.title}> THE BEST PIZZA IN TOWN</h1>

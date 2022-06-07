@@ -2,13 +2,16 @@ import styles from '../styles/Home.module.css';
 import Head from 'next/head';
 import Featured from '../components/Featured';
 import ProductList from '../components/ProductList';
-import axios from 'axios';
+import axios, {AxiosResponse} from 'axios';
 import {useState} from 'react';
 import AddButton from '../components/AddButton';
 import Add from '../components/Add';
+import {GetServerSideProps} from 'next';
+import {NextApiRequestCookies} from 'next/dist/server/api-utils';
+import {Products} from '../interface/Interface';
 
-const Home = ({productList, admin}) => {
-    const [close, setClose] = useState(true);
+const Home = ({productList, admin}): JSX.Element => {
+    const [close, setClose] = useState<boolean>(true);
     return (
         <div className={styles.container}>
             <Head>
@@ -29,13 +32,15 @@ const Home = ({productList, admin}) => {
 
 export default Home;
 
-export const getServerSideProps = async (context) => {
-    const myCookie = context.req?.cookies || '';
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    const myCookie = context.req?.cookies.token || '';
     let admin = false;
-    if (myCookie.token === process.env.TOKEN) {
+    if (myCookie === process.env.TOKEN) {
         admin = true;
     }
-    const res = await axios.get('http://localhost:3000/api/products');
+    const res: AxiosResponse<Products> = await axios.get(
+        'http://localhost:3000/api/products',
+    );
     return {
         props: {
             productList: res.data,

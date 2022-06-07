@@ -1,48 +1,72 @@
-import axios from 'axios';
+import axios, {AxiosResponse} from 'axios';
 import Image from 'next/image';
-import {useState} from 'react';
+import {
+    JSXElementConstructor,
+    Key,
+    ReactElement,
+    ReactFragment,
+    ReactPortal,
+    useState,
+} from 'react';
 import AdminStyle from '../../styles/Admin.module.css';
 import AddButton from '../../components/AddButton';
 import Add from '../../components/Add';
 import {useDispatch} from 'react-redux';
 import {login} from '../../redux/adminSlice';
+import {GetServerSideProps} from 'next';
+import router from 'next/router';
+import {Orders, Products} from '../../interface/Interface';
+import {NextApiRequestCookies} from 'next/dist/server/api-utils';
 
-const Index = ({orders, products, isLogin}) => {
+const Index = ({
+    orders,
+    products,
+    isLogin,
+}: {
+    orders: any;
+    products: any;
+    isLogin: boolean;
+}): JSX.Element => {
     const [productList, setProductList] = useState(products);
     const [orderList, setOrderList] = useState(orders);
-    const [close, setClose] = useState(true);
-    const status = ['preparing', 'on the way', 'delivered'];
+    const [close, setClose] = useState<Boolean>(true);
+    const status: String[] = ['preparing', 'on the way', 'delivered'];
     const dispatch = useDispatch();
-    const handleDelete = async (id) => {
+    const handleDelete = async (id: string): Promise<void> => {
         try {
             await axios.delete(`http://localhost:3000/api/products/${id}`);
-            setProductList(productList.filter((product) => product._id !== id));
+            setProductList(
+                productList.filter(
+                    (product: {_id: string}) => product._id !== id,
+                ),
+            );
         } catch (error) {
             console.log(error);
         }
     };
     dispatch(login(isLogin));
-    const handleStatus = async (id) => {
-        const item = orderList.filter((order) => order._id === id)[0];
+    const handleStatus = async (id: String) => {
+        const item = orderList.filter(
+            (order: {_id: String}) => order._id === id,
+        )[0];
         const currentStatus = item.status;
         if (currentStatus >= 2) {
             return currentStatus;
         }
         try {
-            const res = await axios.put(
+            const res: AxiosResponse = await axios.put(
                 `http://localhost:3000/api/orders/${id}`,
                 {status: currentStatus + 1},
             );
 
             setOrderList([
                 res.data,
-                ...orderList.filter((order) => order._id !== id),
+                ...orderList.filter((order: {_id: String}) => order._id !== id),
             ]);
         } catch (error) {
             console.log(error);
         }
     };
-
     return (
         <>
             {isLogin ? (
@@ -121,7 +145,7 @@ const Index = ({orders, products, isLogin}) => {
                                     </tr>
                                 </tbody>
                                 <tbody>
-                                    {orderList.map((order) => (
+                                    {orderList.map((order: Orders) => (
                                         <tr
                                             className={AdminStyle.trTitle}
                                             key={order._id}>
@@ -158,9 +182,9 @@ const Index = ({orders, products, isLogin}) => {
     );
 };
 
-export const getServerSideProps = async (context) => {
-    const myCookie = context.req?.cookies || '';
-    if (myCookie.token !== process.env.TOKEN) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    const myCookie: string = context.req?.cookies.token;
+    if (myCookie !== process.env.TOKEN) {
         return {
             redirect: {
                 destination: '/admin/login',
@@ -168,10 +192,14 @@ export const getServerSideProps = async (context) => {
             },
         };
     }
-    let isLogin = false;
-    const productRes = await axios.get('http://localhost:3000/api/products');
-    const orderRes = await axios.get('http://localhost:3000/api/orders');
-    if (myCookie.token === process.env.TOKEN) {
+    let isLogin: Boolean = false;
+    const productRes: AxiosResponse<Products> = await axios.get(
+        'http://localhost:3000/api/products',
+    );
+    const orderRes: AxiosResponse<Orders> = await axios.get(
+        'http://localhost:3000/api/orders',
+    );
+    if (myCookie === process.env.TOKEN) {
         isLogin = true;
     }
     return {

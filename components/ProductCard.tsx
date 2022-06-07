@@ -1,7 +1,7 @@
 import ProductCardStyle from '../styles/ProductCard.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
-const ProductCard = ({product}) => {
+const ProductCard = ({product}): JSX.Element => {
     return (
         <div className={ProductCardStyle.container}>
             <Link href={`/product/${product._id}`}>
