@@ -28,7 +28,7 @@ const Login = () => {
     return (
         <div className={LoginStyle.container}>
             <div className={LoginStyle.wrapper}>
-                <h1> Admin Dashboard</h1>
+                <h1 className={LoginStyle.title}> Admin Dashboard</h1>
                 <input
                     placeholder="username"
                     className={LoginStyle.input}
@@ -52,18 +52,3 @@ const Login = () => {
 };
 
 export default Login;
-
-// {!isLogin && (
-//     <div className={LoginStyle.container}>
-//         <div className={LoginStyle.wrapper}>
-//             <h1 className={LoginStyle.errorCode}>
-//                 404 Page Not Found
-//             </h1>
-//             <Link href="/admin">
-//                 <a className={LoginStyle.btn}>
-//                     <i class="ffa-arrow-left"> Back to home</i>
-//                 </a>
-//             </Link>
-//         </div>
-//     </div>
-// )}

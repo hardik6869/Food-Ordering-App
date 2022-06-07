@@ -4,8 +4,13 @@
     align-items: center;
     justify-content: center;
   }
-  
+  .title{
+    color: teal;
+  }
   .wrapper {
+    padding: 50px 40px;
+    box-shadow: 1px 1px 3px 3px rgb(148, 148, 148);
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
   }

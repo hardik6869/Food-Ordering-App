@@ -1,42 +1,39 @@
 import navbarStyle from '../styles/Navbar.module.css';
 import Image from 'next/image';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import Link from 'next/link';
+import {logout} from '../redux/adminSlice';
+import {router} from 'next/router';
 
 const Navbar = () => {
     const quantity = useSelector((state) => state.cart.quantity);
     const isLogin = useSelector((state) => state.admin);
-    const logoutHandler = () => {
-        router.push('/');
-        dispatch(logout(false));
-    };
     return (
         <>
             {isLogin ? (
                 <div className={navbarStyle.container}>
                     <div className={navbarStyle.item}>
-                        <div className={navbarStyle.texts}>
-                            <div className={navbarStyle.text}> ORDER NOW! </div>
-                            <div className={navbarStyle.text}>012 345 678</div>
-                        </div>
+                        <Link href="/" passHref>
+                            <span className={navbarStyle.mlogo}>
+                                <i
+                                    className={`fa-solid fa-pizza-slice ${navbarStyle.logo}`}>
+                                    [̲̅P][̲̅i][̲̅z][̲̅z][̲̅a]
+                                </i>
+                            </span>
+                        </Link>
                     </div>
                     <div className={navbarStyle.item}>
-                        <ul className={navbarStyle.list}>
-                            <Link href="/" passHref>
-                                <span className={navbarStyle.mlogo}>
-                                    <i
-                                        className={`fa-solid fa-pizza-slice ${navbarStyle.logo}`}>
-                                        𝔽𝕠𝕠𝕕
-                                    </i>
-                                </span>
-                            </Link>
-                        </ul>
+                        <div className={navbarStyle.admin}>Admin Dashboard</div>
                     </div>
-                    <div onClick={logoutHandler}>
-                        <div className={navbarStyle.item}>
-                            <div>Logout</div>
-                        </div>
-                    </div>
+                    <ul className={navbarStyle.list}>
+                        <Link href="/admin" passHref>
+                            <li className={navbarStyle.listItem}>Homepage</li>
+                        </Link>
+
+                        <Link href="/" passHref>
+                            <li className={navbarStyle.listItem}>Blog</li>
+                        </Link>
+                    </ul>
                 </div>
             ) : (
                 <div className={navbarStyle.container}>
@@ -70,7 +67,7 @@ const Navbar = () => {
                             <span className={navbarStyle.mlogo}>
                                 <i
                                     className={`fa-solid fa-pizza-slice ${navbarStyle.logo}`}>
-                                    𝔽𝕠𝕠𝕕
+                                    ℙ𝕚𝕫𝕫𝕒
                                 </i>
                             </span>
 

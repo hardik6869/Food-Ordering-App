@@ -4,23 +4,24 @@ import {useState} from 'react';
 import AdminStyle from '../../styles/Admin.module.css';
 import AddButton from '../../components/AddButton';
 import Add from '../../components/Add';
+import {useDispatch} from 'react-redux';
+import {login} from '../../redux/adminSlice';
 
-const Index = ({orders, products}) => {
+const Index = ({orders, products, isLogin}) => {
     const [productList, setProductList] = useState(products);
     const [orderList, setOrderList] = useState(orders);
     const [close, setClose] = useState(true);
     const status = ['preparing', 'on the way', 'delivered'];
+    const dispatch = useDispatch();
     const handleDelete = async (id) => {
         try {
-            const res = await axios.delete(
-                'http://localhost:3000/api/products/' + id,
-            );
+            await axios.delete(`http://localhost:3000/api/products/${id}`);
             setProductList(productList.filter((product) => product._id !== id));
         } catch (error) {
             console.log(error);
         }
     };
-
+    dispatch(login(isLogin));
     const handleStatus = async (id) => {
         const item = orderList.filter((order) => order._id === id)[0];
         const currentStatus = item.status;
@@ -43,104 +44,117 @@ const Index = ({orders, products}) => {
     };
 
     return (
-        <div className={AdminStyle.container}>
-            <div className={AdminStyle.topBtn}>
-                <AddButton setClose={setClose} />
-            </div>
+        <>
+            {isLogin ? (
+                <div className={AdminStyle.container}>
+                    <div className={AdminStyle.topBtn}>
+                        <AddButton setClose={setClose} />
+                    </div>
 
-            {!close && <Add setClose={setClose} />}
-            <div className={AdminStyle.main}>
-                <div className={AdminStyle.item}>
-                    <h1 className={AdminStyle.title}>Products</h1>
-                    <table className={AdminStyle.table}>
-                        <tbody>
-                            <tr className={AdminStyle.trTitle}>
-                                <th>Image</th>
-                                <th>Id</th>
-                                <th>Title</th>
-                                <th>Price</th>
-                                <th>Action</th>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            {productList.map((product) => (
-                                <tr
-                                    className={AdminStyle.trTitle}
-                                    key={product._id}>
-                                    <td>
-                                        <Image
-                                            src={product.img}
-                                            width={50}
-                                            height={50}
-                                            objectFit="cover"
-                                            alt=""
-                                        />
-                                    </td>
-                                    <td>{product._id.slice(0.5)}...</td>
-                                    <td> {product.title} </td>
-                                    <td>₹{product.prices[0]}</td>
-                                    <td>
-                                        <button className={AdminStyle.button}>
-                                            Edit
-                                        </button>
-                                        <button
-                                            className={AdminStyle.button}
-                                            onClick={() =>
-                                                handleDelete(product._id)
-                                            }>
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                    {!close && <Add setClose={setClose} />}
+                    <div className={AdminStyle.main}>
+                        <div className={AdminStyle.item}>
+                            <h1 className={AdminStyle.title}>Products</h1>
+                            <table className={AdminStyle.table}>
+                                <tbody>
+                                    <tr className={AdminStyle.trTitle}>
+                                        <th>Image</th>
+                                        <th>Id</th>
+                                        <th>Title</th>
+                                        <th>Price</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </tbody>
+                                <tbody>
+                                    {productList.map((product) => (
+                                        <tr
+                                            className={AdminStyle.trTitle}
+                                            key={product._id}>
+                                            <td>
+                                                <Image
+                                                    src={product.img}
+                                                    width={50}
+                                                    height={50}
+                                                    objectFit="cover"
+                                                    alt=""
+                                                />
+                                            </td>
+                                            <td>{product._id.slice(0.5)}...</td>
+                                            <td> {product.title} </td>
+                                            <td>₹{product.prices[0]}</td>
+                                            <td>
+                                                <button
+                                                    className={
+                                                        AdminStyle.button
+                                                    }>
+                                                    Edit
+                                                </button>
+                                                <button
+                                                    className={
+                                                        AdminStyle.button
+                                                    }
+                                                    onClick={() =>
+                                                        handleDelete(
+                                                            product._id,
+                                                        )
+                                                    }>
+                                                    Delete
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                        <hr />
+                        <div className={AdminStyle.item}>
+                            <h1 className={AdminStyle.title}>Orders</h1>
+                            <table className={AdminStyle.table}>
+                                <tbody>
+                                    <tr className={AdminStyle.trTitle}>
+                                        <th>Id</th>
+                                        <th>Customer</th>
+                                        <th>Total</th>
+                                        <th>Payment</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </tbody>
+                                <tbody>
+                                    {orderList.map((order) => (
+                                        <tr
+                                            className={AdminStyle.trTitle}
+                                            key={order._id}>
+                                            <td>{order._id.slice(0.5)}...</td>
+                                            <td>{order.customer}</td>
+                                            <td>₹{order.total}</td>
+                                            <td>
+                                                {order.method === 0 ? (
+                                                    <span>Cash</span>
+                                                ) : (
+                                                    <span>Paid</span>
+                                                )}
+                                            </td>
+                                            <td>{status[order.status]}</td>
+                                            <td>
+                                                <button
+                                                    onClick={() => {
+                                                        handleStatus(order._id);
+                                                    }}>
+                                                    Next Stage
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <hr />
-                <div className={AdminStyle.item}>
-                    <h1 className={AdminStyle.title}>Orders</h1>
-                    <table className={AdminStyle.table}>
-                        <tbody>
-                            <tr className={AdminStyle.trTitle}>
-                                <th>Id</th>
-                                <th>Customer</th>
-                                <th>Total</th>
-                                <th>Payment</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            {orderList.map((order) => (
-                                <tr
-                                    className={AdminStyle.trTitle}
-                                    key={order._id}>
-                                    <td>{order._id.slice(0.5)}...</td>
-                                    <td>{order.customer}</td>
-                                    <td>₹{order.total}</td>
-                                    <td>
-                                        {order.method === 0 ? (
-                                            <span>Cash</span>
-                                        ) : (
-                                            <span>Paid</span>
-                                        )}
-                                    </td>
-                                    <td>{status[order.status]}</td>
-                                    <td>
-                                        <button
-                                            onClick={() => {
-                                                handleStatus(order._id);
-                                            }}>
-                                            Next Stage
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+            ) : (
+                router.push('/admin/login')
+            )}
+        </>
     );
 };
 
@@ -154,12 +168,17 @@ export const getServerSideProps = async (context) => {
             },
         };
     }
+    let isLogin = false;
     const productRes = await axios.get('http://localhost:3000/api/products');
     const orderRes = await axios.get('http://localhost:3000/api/orders');
+    if (myCookie.token === process.env.TOKEN) {
+        isLogin = true;
+    }
     return {
         props: {
             orders: orderRes.data,
             products: productRes.data,
+            isLogin,
         },
     };
 };

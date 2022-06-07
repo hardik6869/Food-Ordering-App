@@ -9,6 +9,14 @@
     top: 0;
     z-index: 999;
 }
+.admin{
+    font-weight: 600;
+    color: white;
+    letter-spacing: 5px;
+    font-size: 25px;
+    text-align: center;
+    text-shadow: teal 1px 0 10px;
+}
 .item{
     flex:3;
     display: flex;
@@ -44,7 +52,8 @@
     background-color: white;
     border-radius: 50%;
     padding: 10px;
-    color: rgb(200, 48, 48); 
+    color: teal; 
+    box-shadow: tomato 5px 0 10px;
 }
 
 .logo{
