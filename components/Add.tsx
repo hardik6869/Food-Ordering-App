@@ -1,6 +1,7 @@
 import {ChangeEvent, useState} from 'react';
 import axios, {AxiosResponse} from 'axios';
 import styles from '../styles/Add.module.css';
+import {toast} from 'react-toastify';
 
 const Add = ({setClose}): JSX.Element => {
     const [file, setFile] = useState(null);
@@ -47,8 +48,10 @@ const Add = ({setClose}): JSX.Element => {
             };
             await axios.post(`${process.env.BASE_URL}/products`, newProduct);
             setClose(true);
+            toast.success('Product created');
         } catch (error) {
             console.log(error);
+            toast.error('Product creation failed');
         }
     };
     return (

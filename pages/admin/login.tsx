@@ -4,6 +4,7 @@ import {useState} from 'react';
 import LoginStyle from '../../styles/Login.module.css';
 import {useDispatch} from 'react-redux';
 import {login} from '../../redux/adminSlice';
+import {toast} from 'react-toastify';
 
 const Login = (): JSX.Element => {
     const [username, setUsername] = useState<String>(null);
@@ -20,8 +21,10 @@ const Login = (): JSX.Element => {
             });
             router.push('/admin');
             dispatch(login(true));
+            toast.success('Login Successful');
         } catch (error) {
             setError(true);
+            toast.error('Login Failed');
         }
     };
 

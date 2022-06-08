@@ -7,6 +7,7 @@ import {addProduct} from '../../redux/cartSlice';
 import {GetServerSideProps} from 'next';
 import {Products} from '../../interface/Interface';
 import {ProdOption} from '../../interface/Interface';
+import {toast} from 'react-toastify';
 
 const Product = ({product}: {product: Products}): JSX.Element => {
     const [price, setPrice] = useState(product.prices[0]);
@@ -39,6 +40,7 @@ const Product = ({product}: {product: Products}): JSX.Element => {
     };
     const handleClick = (): void => {
         dispatch(addProduct({...product, extras, price, quantity}));
+        toast.success(`Added ${product.title} to cart`);
     };
     return (
         <div className={ProductStyle.container}>

@@ -1,13 +1,6 @@
 import axios, {AxiosResponse} from 'axios';
 import Image from 'next/image';
-import {
-    JSXElementConstructor,
-    Key,
-    ReactElement,
-    ReactFragment,
-    ReactPortal,
-    useState,
-} from 'react';
+import {useState} from 'react';
 import AdminStyle from '../../styles/Admin.module.css';
 import AddButton from '../../components/AddButton';
 import Add from '../../components/Add';
@@ -16,7 +9,7 @@ import {login} from '../../redux/adminSlice';
 import {GetServerSideProps} from 'next';
 import router from 'next/router';
 import {Orders, Products} from '../../interface/Interface';
-import {NextApiRequestCookies} from 'next/dist/server/api-utils';
+import {toast} from 'react-toastify';
 
 const Index = ({
     orders,
@@ -40,8 +33,10 @@ const Index = ({
                     (product: {_id: string}) => product._id !== id,
                 ),
             );
+            toast.success('Product deleted successfully');
         } catch (error) {
             console.log(error);
+            toast.error('Product deletion failed');
         }
     };
     dispatch(login(isLogin));
@@ -63,8 +58,12 @@ const Index = ({
                 res.data,
                 ...orderList.filter((order: {_id: String}) => order._id !== id),
             ]);
+            toast.success(
+                `Order ${id} status changed to ${status[currentStatus + 1]}`,
+            );
         } catch (error) {
             console.log(error);
+            toast.error(`Order ${id} status change failed`);
         }
     };
     return (
