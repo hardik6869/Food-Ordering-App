@@ -152,7 +152,7 @@ const Order = ({order}: {order: Orders}): JSX.Element => {
 };
 export const getServerSideProps: GetServerSideProps = async ({params}) => {
     const res: AxiosResponse<Orders> = await axios.get(
-        `https://food-ordering-app-one.vercel.app/api/orders/${params.id}`,
+        `${process.env.BASE_URL}/orders/${params.id}`,
     );
     return {
         props: {order: res.data},

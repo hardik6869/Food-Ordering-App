@@ -30,7 +30,7 @@ const Cart = (): JSX.Element => {
     }) => {
         try {
             const res: AxiosResponse = await axios.post(
-                'https://food-ordering-app-one.vercel.app/api/orders',
+                `${process.env.BASE_URL}/orders`,
                 data,
             );
             if (res.status === 201) {

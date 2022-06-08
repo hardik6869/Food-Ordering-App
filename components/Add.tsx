@@ -45,10 +45,7 @@ const Add = ({setClose}): JSX.Element => {
                 extraOptions,
                 img: url,
             };
-            await axios.post(
-                'https://food-ordering-app-one.vercel.app/api/products',
-                newProduct,
-            );
+            await axios.post(`${process.env.BASE_URL}/products`, newProduct);
             setClose(true);
         } catch (error) {
             console.log(error);
