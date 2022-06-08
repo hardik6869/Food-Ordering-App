@@ -1,13 +1,6 @@
 import axios, {AxiosResponse} from 'axios';
 import Image from 'next/image';
-import {
-    JSXElementConstructor,
-    Key,
-    ReactElement,
-    ReactFragment,
-    ReactPortal,
-    useState,
-} from 'react';
+import {useState} from 'react';
 import AdminStyle from '../../styles/Admin.module.css';
 import AddButton from '../../components/AddButton';
 import Add from '../../components/Add';
@@ -16,7 +9,6 @@ import {login} from '../../redux/adminSlice';
 import {GetServerSideProps} from 'next';
 import router from 'next/router';
 import {Orders, Products} from '../../interface/Interface';
-import {NextApiRequestCookies} from 'next/dist/server/api-utils';
 
 const Index = ({
     orders,
@@ -34,7 +26,9 @@ const Index = ({
     const dispatch = useDispatch();
     const handleDelete = async (id: string): Promise<void> => {
         try {
-            await axios.delete(`http://localhost:3000/api/products/${id}`);
+            await axios.delete(
+                `https://food-ordering-app-one.vercel.app/api/products/${id}`,
+            );
             setProductList(
                 productList.filter(
                     (product: {_id: string}) => product._id !== id,
@@ -55,7 +49,7 @@ const Index = ({
         }
         try {
             const res: AxiosResponse = await axios.put(
-                `http://localhost:3000/api/orders/${id}`,
+                `https://food-ordering-app-one.vercel.app/api/orders/${id}`,
                 {status: currentStatus + 1},
             );
 
@@ -194,10 +188,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
     let isLogin: Boolean = false;
     const productRes: AxiosResponse<Products> = await axios.get(
-        'http://localhost:3000/api/products',
+        'https://food-ordering-app-one.vercel.app/api/products',
     );
     const orderRes: AxiosResponse<Orders> = await axios.get(
-        'http://localhost:3000/api/orders',
+        'https://food-ordering-app-one.vercel.app/api/orders',
     );
     if (myCookie === process.env.TOKEN) {
         isLogin = true;

@@ -14,10 +14,13 @@ const Login = (): JSX.Element => {
 
     const handleClick = async (): Promise<void> => {
         try {
-            await axios.post('http://localhost:3000/api/login', {
-                username,
-                password,
-            });
+            await axios.post(
+                'https://food-ordering-app-one.vercel.app/api/login',
+                {
+                    username,
+                    password,
+                },
+            );
             router.push('/admin');
             dispatch(login(true));
         } catch (error) {

@@ -118,7 +118,7 @@ export default Product;
 
 export const getServerSideProps: GetServerSideProps = async ({params}) => {
     const res: AxiosResponse<Products> = await axios.get(
-        `http://localhost:3000/api/products/${params.id}`,
+        `https://food-ordering-app-one.vercel.app/api/products/${params.id}`,
     );
     return {
         props: {

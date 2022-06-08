@@ -4,8 +4,8 @@ import {useSelector} from 'react-redux';
 import Link from 'next/link';
 
 const Navbar = (): JSX.Element => {
-    const quantity = useSelector((state) => state.cart.quantity);
-    const isLogin = useSelector((state) => state.admin);
+    const quantity = useSelector((state: any) => state.cart.quantity);
+    const isLogin = useSelector((state: any) => state.admin);
     return (
         <>
             {isLogin ? (

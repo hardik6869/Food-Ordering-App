@@ -13,7 +13,7 @@ import {NextRouter, useRouter} from 'next/router';
 import OrderDetaild from '../components/OrderDetaild';
 
 const Cart = (): JSX.Element => {
-    const cart = useSelector((state) => state.cart);
+    const cart = useSelector((state: any) => state.cart);
     const [open, setOpen] = useState<boolean>(false);
     const [cash, setCash] = useState<boolean>(false);
     const amount: string = cart.total;
@@ -30,7 +30,7 @@ const Cart = (): JSX.Element => {
     }) => {
         try {
             const res: AxiosResponse = await axios.post(
-                'http://localhost:3000/api/orders',
+                'https://food-ordering-app-one.vercel.app/api/orders',
                 data,
             );
             if (res.status === 201) {

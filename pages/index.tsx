@@ -39,7 +39,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         admin = true;
     }
     const res: AxiosResponse<Products> = await axios.get(
-        'http://localhost:3000/api/products',
+        'https://food-ordering-app-one.vercel.app/api/products',
     );
     return {
         props: {
