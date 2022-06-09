@@ -11,12 +11,13 @@ import {reset} from '../redux/cartSlice';
 import axios, {AxiosResponse} from 'axios';
 import {NextRouter, useRouter} from 'next/router';
 import OrderDetaild from '../components/OrderDetaild';
+import {CartState} from '../interface/Interface';
 
 const Cart = (): JSX.Element => {
-    const cart = useSelector((state: any) => state.cart);
+    const cart = useSelector((state: CartState) => state.cart);
     const [open, setOpen] = useState<boolean>(false);
     const [cash, setCash] = useState<boolean>(false);
-    const amount: string = cart.total;
+    const amount: number = cart.total;
     const currency = 'USD';
     const style: Object = {layout: 'vertical'};
     const dispatch = useDispatch();
@@ -62,32 +63,27 @@ const Cart = (): JSX.Element => {
                     disabled={false}
                     forceReRender={[amount, currency, style]}
                     fundingSource={undefined}
-                    createOrder={(data, actions) => {
-                        return actions.order
-                            .create({
-                                purchase_units: [
-                                    {
-                                        amount: {
-                                            currency_code: currency,
-                                            value: amount,
-                                        },
+                    createOrder={async (data, actions) => {
+                        const orderId: string = await actions.order.create({
+                            purchase_units: [
+                                {
+                                    amount: {
+                                        currency_code: currency,
+                                        value: amount,
                                     },
-                                ],
-                            })
-                            .then((orderId) => {
-                                // Your code here after create the order
-                                return orderId;
-                            });
+                                },
+                            ],
+                        });
+                        return orderId;
                     }}
-                    onApprove={function (data, actions) {
-                        return actions.order.capture().then(function (details) {
-                            const shipping = details.purchase_units[0].shipping;
-                            createOrder({
-                                customer: shipping.name.full_name,
-                                address: shipping.address.address_line_1,
-                                total: cart.total,
-                                method: 1,
-                            });
+                    onApprove={async function (data, actions) {
+                        const details = await actions.order.capture();
+                        const shipping = details.purchase_units[0].shipping;
+                        createOrder({
+                            customer: shipping.name.full_name,
+                            address: shipping.address.address_line_1,
+                            total: cart.total,
+                            method: 1,
                         });
                     }}
                 />

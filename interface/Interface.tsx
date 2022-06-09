@@ -23,6 +23,16 @@ export interface Products {
     ];
     createdAt: string;
     updatedAt: string;
+    extras: [
+        {
+            _id: string;
+            text: string;
+            price: number;
+        },
+    ];
+
+    quantity: number;
+    price: number;
 }
 
 export interface Cart {
@@ -47,8 +57,11 @@ export interface adminSlices {
     updatedAt: string;
 }
 
-export interface cartSlice {
+export interface Cart {
     products: [Products];
     quantity: number;
     total: number;
+}
+export interface CartState {
+    cart: Cart;
 }

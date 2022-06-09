@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import ProductStyle from '../../styles/Product.module.css';
-import {ChangeEvent, useState} from 'react';
+import {ChangeEvent, SetStateAction, useState} from 'react';
 import axios, {AxiosResponse} from 'axios';
 import {useDispatch} from 'react-redux';
 import {addProduct} from '../../redux/cartSlice';
@@ -12,7 +12,7 @@ import {toast} from 'react-toastify';
 const Product = ({product}: {product: Products}): JSX.Element => {
     const [price, setPrice] = useState(product.prices[0]);
     const [size, setSize] = useState(0);
-    const [quantity, setQuantity] = useState(1);
+    const [quantity, setQuantity] = useState<number>(1);
     const [extras, setExtras] = useState([]);
     const dispatch = useDispatch();
 
@@ -42,6 +42,7 @@ const Product = ({product}: {product: Products}): JSX.Element => {
         dispatch(addProduct({...product, extras, price, quantity}));
         toast.success(`Added ${product.title} to cart`);
     };
+
     return (
         <div className={ProductStyle.container}>
             <div className={ProductStyle.left}>
@@ -103,6 +104,7 @@ const Product = ({product}: {product: Products}): JSX.Element => {
                         type="number"
                         onChange={(e) => setQuantity(Number(e.target.value))}
                         defaultValue={1}
+                        min={1}
                         className={ProductStyle.quantity}
                     />
                     <button

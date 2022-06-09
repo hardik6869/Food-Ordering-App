@@ -89,7 +89,7 @@ const Index = ({
                                     </tr>
                                 </tbody>
                                 <tbody>
-                                    {productList.map((product) => (
+                                    {productList.map((product: Products) => (
                                         <tr
                                             className={AdminStyle.trTitle}
                                             key={product._id}>
