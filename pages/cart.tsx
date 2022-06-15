@@ -11,13 +11,13 @@ import {reset} from '../redux/cartSlice';
 import axios, {AxiosResponse} from 'axios';
 import {NextRouter, useRouter} from 'next/router';
 import OrderDetaild from '../components/OrderDetaild';
-import {CartState} from '../interface/Interface';
+import {CartState, Products} from '../interface/Interface';
 
 const Cart = (): JSX.Element => {
-    const cart = useSelector((state: CartState) => state.cart);
+    const cart = useSelector((state: any) => state.cart);
     const [open, setOpen] = useState<boolean>(false);
     const [cash, setCash] = useState<boolean>(false);
-    const amount: Number = cart.total;
+    const amount = cart.total;
     const currency = 'USD';
     const style: Object = {layout: 'vertical'};
     const dispatch = useDispatch();
@@ -106,7 +106,7 @@ const Cart = (): JSX.Element => {
                         </tr>
                     </tbody>
                     <tbody>
-                        {cart.products.map((product) => (
+                        {cart.products.map((product: Products) => (
                             <tr className={CartStyle.tr} key={product._id}>
                                 <td>
                                     <div className={CartStyle.imgContainer}>
