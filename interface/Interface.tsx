@@ -30,7 +30,6 @@ export interface Products {
             price: number;
         },
     ];
-
     quantity: number;
     price: number;
 }

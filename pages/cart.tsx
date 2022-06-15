@@ -17,7 +17,7 @@ const Cart = (): JSX.Element => {
     const cart = useSelector((state: CartState) => state.cart);
     const [open, setOpen] = useState<boolean>(false);
     const [cash, setCash] = useState<boolean>(false);
-    const amount: number = cart.total;
+    const amount: Number = cart.total;
     const currency = 'USD';
     const style: Object = {layout: 'vertical'};
     const dispatch = useDispatch();

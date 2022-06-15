@@ -15,7 +15,7 @@ const Login = (): JSX.Element => {
 
     const handleClick = async (): Promise<void> => {
         try {
-            await axios.post('http://localhost:3000/api/login', {
+            await axios.post(`${process.env.BASE_URL}/login`, {
                 username,
                 password,
             });

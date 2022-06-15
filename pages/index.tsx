@@ -7,7 +7,6 @@ import {useState} from 'react';
 import AddButton from '../components/AddButton';
 import Add from '../components/Add';
 import {GetServerSideProps} from 'next';
-import {NextApiRequestCookies} from 'next/dist/server/api-utils';
 import {Products} from '../interface/Interface';
 
 const Home = ({productList, admin}): JSX.Element => {

@@ -2,18 +2,18 @@ import Image from 'next/image';
 const signin = () => {
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gray-300">
-            <div className="flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-md w-full max-w-md">
-                <div className="m-5">
-                    <div className="left-0 top-0 flex justify-center w-full -mt-2">
+            <div className=" flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-md w-full max-w-md">
+                <div className="m-5 relative">
+                    <div className="absolute -mt-20 ml-32 shadow rounded-full bg-white m-auto">
                         <Image
                             src="/assets/user.png"
-                            height={50}
-                            width={50}
+                            height={75}
+                            width={75}
                             alt=""
                         />
                     </div>
                 </div>
-                <div className="font-medium self-center text-xl sm:text-2xl uppercase text-gray-800">
+                <div className="font-medium self-center text-xl sm:text-2xl uppercase text-teal-600">
                     Login To Your Account
                 </div>
                 <div className="mt-10">
