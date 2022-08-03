@@ -1,10 +1,10 @@
 import {useState} from 'react';
 import OrderDetailStyle from '../styles/OrderDetail.module.css';
 
-const OrderDetaild = ({total, createOrder}) => {
-    const [customer, setCustomer] = useState('');
-    const [address, setAddress] = useState('');
-    const handleClick = () => {
+const OrderDetaild = ({total, createOrder}): JSX.Element => {
+    const [customer, setCustomer] = useState<string>('');
+    const [address, setAddress] = useState<string>('');
+    const handleClick = (): void => {
         createOrder({customer, address, total, method: 0});
     };
     return (
@@ -39,7 +39,6 @@ const OrderDetaild = ({total, createOrder}) => {
                     <textarea
                         rows={5}
                         placeholder="Ahmedabad 505 IND"
-                        type="text"
                         className={OrderDetailStyle.textarea}
                         onChange={(e) => setAddress(e.target.value)}
                     />

@@ -8,24 +8,30 @@ import {
     usePayPalScriptReducer,
 } from '@paypal/react-paypal-js';
 import {reset} from '../redux/cartSlice';
-import axios from 'axios';
-import {useRouter} from 'next/router';
+import axios, {AxiosResponse} from 'axios';
+import {NextRouter, useRouter} from 'next/router';
 import OrderDetaild from '../components/OrderDetaild';
+import {CartState, Products} from '../interface/Interface';
 
-const Cart = () => {
-    const cart = useSelector((state) => state.cart);
-    const [open, setOpen] = useState(false);
-    const [cash, setCash] = useState(false);
+const Cart = (): JSX.Element => {
+    const cart = useSelector((state: any) => state.cart);
+    const [open, setOpen] = useState<boolean>(false);
+    const [cash, setCash] = useState<boolean>(false);
     const amount = cart.total;
     const currency = 'USD';
-    const style = {layout: 'vertical'};
+    const style: Object = {layout: 'vertical'};
     const dispatch = useDispatch();
-    const router = useRouter();
+    const router: NextRouter = useRouter();
 
-    const createOrder = async (data) => {
+    const createOrder = async (data: {
+        customer: string;
+        address: string;
+        total: number;
+        method: number;
+    }) => {
         try {
-            const res = await axios.post(
-                'http://localhost:3000/api/orders',
+            const res: AxiosResponse = await axios.post(
+                `${process.env.BASE_URL}/orders`,
                 data,
             );
             if (res.status === 201) {
@@ -38,10 +44,7 @@ const Cart = () => {
     };
 
     const ButtonWrapper = ({currency, showSpinner}) => {
-        // usePayPalScriptReducer can be use only inside children of PayPalScriptProviders
-        // This is the main reason to wrap the PayPalButtons in a new component
         const [{options, isPending}, dispatch] = usePayPalScriptReducer();
-
         useEffect(() => {
             dispatch({
                 type: 'resetOptions',
@@ -60,32 +63,27 @@ const Cart = () => {
                     disabled={false}
                     forceReRender={[amount, currency, style]}
                     fundingSource={undefined}
-                    createOrder={(data, actions) => {
-                        return actions.order
-                            .create({
-                                purchase_units: [
-                                    {
-                                        amount: {
-                                            currency_code: currency,
-                                            value: amount,
-                                        },
+                    createOrder={async (data, actions) => {
+                        const orderId: string = await actions.order.create({
+                            purchase_units: [
+                                {
+                                    amount: {
+                                        currency_code: currency,
+                                        value: amount,
                                     },
-                                ],
-                            })
-                            .then((orderId) => {
-                                // Your code here after create the order
-                                return orderId;
-                            });
+                                },
+                            ],
+                        });
+                        return orderId;
                     }}
-                    onApprove={function (data, actions) {
-                        return actions.order.capture().then(function (details) {
-                            const shipping = details.purchase_units[0].shipping;
-                            createOrder({
-                                customer: shipping.name.full_name,
-                                address: shipping.address.address_line_1,
-                                total: cart.total,
-                                method: 1,
-                            });
+                    onApprove={async function (data, actions) {
+                        const details = await actions.order.capture();
+                        const shipping = details.purchase_units[0].shipping;
+                        createOrder({
+                            customer: shipping.name.full_name,
+                            address: shipping.address.address_line_1,
+                            total: cart.total,
+                            method: 1,
                         });
                     }}
                 />
@@ -108,7 +106,7 @@ const Cart = () => {
                         </tr>
                     </tbody>
                     <tbody>
-                        {cart.products.map((product) => (
+                        {cart.products.map((product: Products) => (
                             <tr className={CartStyle.tr} key={product._id}>
                                 <td>
                                     <div className={CartStyle.imgContainer}>

@@ -1,9 +1,11 @@
 import Image from 'next/image';
 import OrderStyle from '../../styles/Order.module.css';
-import axios from 'axios';
-const Order = ({order}) => {
+import axios, {AxiosResponse} from 'axios';
+import {GetServerSideProps} from 'next';
+import {Orders} from '../../interface/Interface';
+const Order = ({order}: {order: Orders}): JSX.Element => {
     const status = order.status;
-    const statusClass = (index) => {
+    const statusClass = (index: number): string => {
         if (index - status < 1) return OrderStyle.done;
         if (index - status === 1) return OrderStyle.inProgress;
         if (index - status > 1) return OrderStyle.unDone;
@@ -148,9 +150,9 @@ const Order = ({order}) => {
         </div>
     );
 };
-export const getServerSideProps = async ({params}) => {
-    const res = await axios.get(
-        `http://localhost:3000/api/orders/${params.id}`,
+export const getServerSideProps: GetServerSideProps = async ({params}) => {
+    const res: AxiosResponse<Orders> = await axios.get(
+        `${process.env.BASE_URL}/orders/${params.id}`,
     );
     return {
         props: {order: res.data},

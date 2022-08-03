@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import FooterStyle from '../styles/Footer.module.css';
 
-const Footer = () => {
+const Footer = (): JSX.Element => {
     return (
         <div className={FooterStyle.container}>
             <div className={FooterStyle.item}>

@@ -1,5 +1,5 @@
 import AddStyle from '../styles/Add.module.css';
-const AddButton = ({setClose}) => {
+const AddButton = ({setClose}): JSX.Element => {
     return (
         <div
             onClick={() => {

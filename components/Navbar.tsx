@@ -1,13 +1,11 @@
 import navbarStyle from '../styles/Navbar.module.css';
 import Image from 'next/image';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import Link from 'next/link';
-import {logout} from '../redux/adminSlice';
-import {router} from 'next/router';
 
-const Navbar = () => {
-    const quantity = useSelector((state) => state.cart.quantity);
-    const isLogin = useSelector((state) => state.admin);
+const Navbar = (): JSX.Element => {
+    const quantity = useSelector((state: any) => state.cart.quantity);
+    const isLogin = useSelector((state: any) => state.admin);
     return (
         <>
             {isLogin ? (

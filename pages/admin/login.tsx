@@ -4,24 +4,27 @@ import {useState} from 'react';
 import LoginStyle from '../../styles/Login.module.css';
 import {useDispatch} from 'react-redux';
 import {login} from '../../redux/adminSlice';
+import {toast} from 'react-toastify';
 
-const Login = () => {
-    const [username, setUsername] = useState(null);
-    const [password, setPassword] = useState(null);
-    const [error, setError] = useState(false);
+const Login = (): JSX.Element => {
+    const [username, setUsername] = useState<String>(null);
+    const [password, setPassword] = useState<String>(null);
+    const [error, setError] = useState<boolean>(false);
     const dispatch = useDispatch();
     const router = useRouter();
 
-    const handleClick = async () => {
+    const handleClick = async (): Promise<void> => {
         try {
-            await axios.post('http://localhost:3000/api/login', {
+            await axios.post(`${process.env.BASE_URL}/login`, {
                 username,
                 password,
             });
             router.push('/admin');
-            dispatch(login());
+            dispatch(login(true));
+            toast.success('Login Successful');
         } catch (error) {
             setError(true);
+            toast.error('Login Failed');
         }
     };
 

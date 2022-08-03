@@ -1,7 +1,8 @@
+import {NextApiRequest, NextApiResponse} from 'next';
 import dbConnect from '../../../lib/mongo';
 import Order from '../../../models/Order';
 
-const handler = async (req, res) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const {method} = req;
     await dbConnect();
     if (method === 'GET') {

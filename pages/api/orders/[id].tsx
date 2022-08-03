@@ -1,7 +1,11 @@
+import {NextApiRequest, NextApiResponse} from 'next';
 import dbConnect from '../../../lib/mongo';
 import Order from '../../../models/Order';
 
-const handler = async (req, res) => {
+const handler = async (
+    req: NextApiRequest,
+    res: NextApiResponse,
+): Promise<void> => {
     const {
         method,
         query: {id},
@@ -26,8 +30,6 @@ const handler = async (req, res) => {
         } catch (error) {
             res.status(500).json(error);
         }
-    }
-    if (method === 'DELETE') {
     }
 };
 
