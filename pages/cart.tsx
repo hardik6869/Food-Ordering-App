@@ -14,7 +14,7 @@ import OrderDetaild from '../components/OrderDetaild';
 import {CartState, Products} from '../interface/Interface';
 
 const Cart = (): JSX.Element => {
-    const cart = useSelector((state: any) => state.cart);
+    const cart = useSelector((state: CartState) => state.cart);
     const [open, setOpen] = useState<boolean>(false);
     const [cash, setCash] = useState<boolean>(false);
     const amount = cart.total;
@@ -68,8 +68,8 @@ const Cart = (): JSX.Element => {
                             purchase_units: [
                                 {
                                     amount: {
-                                        currency_code: currency,
-                                        value: amount,
+                                        currency_code: currency as string,
+                                        value: amount as unknown as string,
                                     },
                                 },
                             ],

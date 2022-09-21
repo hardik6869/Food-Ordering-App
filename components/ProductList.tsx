@@ -1,3 +1,4 @@
+import {Products} from '../interface/Interface';
 import ProductListStyle from '../styles/ProductList.module.css';
 import ProductCard from './ProductCard';
 
@@ -11,8 +12,8 @@ const ProductList = ({productList}): JSX.Element => {
                 acme. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </p>
             <div className={ProductListStyle.wrapper}>
-                {productList.map((product) => (
-                    <ProductCard key={product.id} product={product} />
+                {productList.map((product: Products) => (
+                    <ProductCard key={product._id} product={product} />
                 ))}
             </div>
         </div>

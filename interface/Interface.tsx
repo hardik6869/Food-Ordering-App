@@ -10,6 +10,10 @@ export interface Orders {
 }
 
 export interface Products {
+    map(arg0: (product: Products) => JSX.Element): import('react').ReactNode;
+    filter(
+        arg0: (product: {_id: string}) => boolean,
+    ): import('react').SetStateAction<Products>;
     _id: string;
     title: string;
     desc: string;

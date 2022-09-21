@@ -17,7 +17,7 @@ const Index = ({
     isLogin,
 }: {
     orders: any;
-    products: any;
+    products: Products;
     isLogin: boolean;
 }): JSX.Element => {
     const [productList, setProductList] = useState(products);

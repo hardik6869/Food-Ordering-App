@@ -1,11 +1,12 @@
 import {createSlice} from '@reduxjs/toolkit';
+import {Products} from '../interface/Interface';
 
 const cartSlice = createSlice({
     name: 'cart',
     initialState: {
-        products: [],
-        quantity: 0,
-        total: 0,
+        products: [] as Products[],
+        quantity: 0 as number,
+        total: 0 as number,
     },
     reducers: {
         addProduct: (state, action) => {
